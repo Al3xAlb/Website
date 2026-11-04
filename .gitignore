@@ -1,0 +1,13 @@
+bin/
+obj/
+data/admin.json
+data/event-key.json
+data/private-gallery-keys.json
+data/settings.json
+data/galleries.json
+data/uploads/
+data/photo-cache/
+data/*.tmp
+wwwroot/uploads/
+photos/
+.aspnet/

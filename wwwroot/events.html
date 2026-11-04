@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5f0" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#171916" media="(prefers-color-scheme: dark)">
+  <meta name="description" content="Public event photography and selected private galleries by Alex.">
+  <meta property="og:title" content="Events — Alex">
+  <meta property="og:description" content="Public event photography and selected private galleries by Alex.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1200&q=85">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Events — Alex</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='80' font-family='serif' font-weight='bold' fill='%23bd5637'>A.</text></svg>">
+  <link rel="dns-prefetch" href="https://images.unsplash.com">
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/gallery.js" defer></script>
+</head>
+<body data-page="events">
+  <header class="site-header">
+    <a class="wordmark" href="/" aria-label="Alex home">A<span>.</span></a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a class="nav-link" href="/#work">Selected work</a>
+      <a class="nav-link active" href="/events" aria-current="page">Events</a>
+      <a class="nav-link" href="/#about">About</a>
+      <a class="nav-link" href="mailto:hello@example.com" data-open-contact>Get in touch <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="events-hero">
+      <div class="events-hero-copy reveal">
+        <p class="eyebrow"><span class="status-dot"></span> ALEX / GATHERED MOMENTS</p>
+        <h1>People, places<br><em>in celebration.</em></h1>
+        <p class="events-intro">A collection of the gatherings, milestones and in-between moments I've had the joy of photographing.</p>
+      </div>
+      <div class="events-hero-aside reveal">
+        <p>EVERY GATHERING HAS ITS OWN WAY OF FEELING.</p>
+        <button class="button button-quiet" type="button" data-open-event-access>Private gallery access <span aria-hidden="true">↗</span></button>
+      </div>
+    </section>
+
+    <section class="events-work section-wrap" id="events-work">
+      <div class="events-access-status">
+        <p class="private-access-note" id="private-access-note" role="status">Public event galleries are open to everyone.</p>
+        <button class="button button-quiet hidden" id="lock-private-work" type="button">Lock private gallery</button>
+      </div>
+      <div class="section-heading reveal">
+        <div>
+          <p class="eyebrow">A day worth keeping</p>
+          <h2>Event stories<span class="heading-period">.</span></h2>
+        </div>
+        <p class="section-aside"><span id="gallery-count">—</span> STORIES</p>
+      </div>
+      <div class="filter-row" id="filters" aria-label="Filter event galleries"></div>
+      <div class="gallery-grid" id="gallery-grid" aria-live="polite">
+        <p class="loading-note">Gathering a few moments<span class="loading-dots">...</span></p>
+      </div>
+      <div class="work-footer">
+        <span>PHOTOGRAPHED WITH CARE</span>
+        <a href="/">BACK TO ALL WORK &nbsp; ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="event-splash" id="event-splash" aria-labelledby="event-splash-title">
+    <div class="event-splash-inner">
+      <header class="site-header splash-brand">
+        <a class="wordmark" href="/" aria-label="Alex home">A<span>.</span></a>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a class="nav-link" href="/#work">Selected work</a>
+          <a class="nav-link active" href="/events" aria-current="page">Events</a>
+          <a class="nav-link" href="/#about">About</a>
+          <a class="nav-link" href="mailto:hello@example.com" data-open-contact>Get in touch <span aria-hidden="true">↗</span></a>
+        </nav>
+      </header>
+      <figure class="splash-image">
+        <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1800&q=85" srcset="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=720&q=85 720w, https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1200&q=85 1200w, https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1800&q=85 1800w" sizes="(max-width: 800px) 100vw, 52vw" alt="" fetchpriority="high">
+        <figcaption><span>THE BEAUTY OF BEING TOGETHER</span><span>01 — ALEX / EVENTS</span></figcaption>
+      </figure>
+      <p class="eyebrow"><span class="status-dot"></span> A COLLECTION OF GATHERED MOMENTS</p>
+      <h2 id="event-splash-title"><span class="splash-title-line"><span>Some stories are</span></span><span class="splash-title-line"><span><em>for everyone.</em></span></span></h2>
+      <p class="splash-description">Step into the public event galleries, or use a gallery’s personal key to open a private collection.</p>
+      <div class="splash-actions" id="splash-actions">
+        <button class="button button-dark" id="browse-public-events" type="button" autofocus>Browse public events <span aria-hidden="true">↗</span></button>
+        <button class="button button-outline" id="show-private-entry" type="button">I have an access key <span aria-hidden="true">→</span></button>
+      </div>
+      <form class="splash-key-form hidden" id="event-key-form">
+        <label for="event-key">Your 8-character gallery access key</label>
+        <div class="splash-key-row">
+          <input id="event-key" name="key" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="8" minlength="8" pattern="[A-Za-z0-9]{8}" placeholder="ENTER YOUR KEY" aria-describedby="event-key-message" required>
+          <button class="button button-dark" type="submit">Unlock <span aria-hidden="true">↗</span></button>
+        </div>
+        <p class="form-message" id="event-key-message" role="status" aria-live="polite"></p>
+      </form>
+      <div class="splash-footer">
+        <button class="button button-quiet hidden" id="back-to-splash" type="button">← Back</button>
+        <p id="splash-access-note">Each private gallery has its own key, shared directly with its guests.</p>
+        <button class="button button-quiet hidden" id="enter-unlocked-events" type="button">Enter private gallery ↗</button>
+      </div>
+    </div>
+    <button class="event-splash-dismiss" id="dismiss-event-splash" type="button" aria-label="Close welcome screen and browse public events">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M13 3H5v18h8" />
+        <path d="M10 12h11m-4-4 4 4-4 4" />
+      </svg>
+    </button>
+  </dialog>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">A<span>.</span></a>
+    <span>MADE WITH CARE, WHEREVER I AM.</span>
+    <a href="mailto:hello@example.com" data-open-contact>SAY HELLO <span aria-hidden="true">↗</span></a>
+    <span>© <span id="year"></span> ALEX</span>
+  </footer>
+
+  <dialog class="contact-splash" id="contact-splash" aria-labelledby="contact-splash-title">
+    <div class="contact-splash-inner">
+      <header class="site-header splash-brand">
+        <a class="wordmark" href="/" aria-label="Alex home">A<span>.</span></a>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a class="nav-link" href="/#work">Selected work</a>
+          <a class="nav-link" href="/events" aria-current="page">Events</a>
+          <a class="nav-link" href="/#about">About</a>
+          <a class="nav-link" href="mailto:hello@example.com" data-open-contact>Get in touch <span aria-hidden="true">↗</span></a>
+        </nav>
+      </header>
+      <figure class="contact-splash-image">
+        <img src="https://images.unsplash.com/photo-1452587925148-ce544e77e70d?auto=format&fit=crop&w=1600&q=85" srcset="https://images.unsplash.com/photo-1452587925148-ce544e77e70d?auto=format&fit=crop&w=720&q=85 720w, https://images.unsplash.com/photo-1452587925148-ce544e77e70d?auto=format&fit=crop&w=1200&q=85 1200w, https://images.unsplash.com/photo-1452587925148-ce544e77e70d?auto=format&fit=crop&w=1600&q=85 1600w" sizes="(max-width: 800px) 100vw, 52vw" alt="" loading="lazy" decoding="async">
+        <figcaption>GOOD THINGS START WITH A CONVERSATION</figcaption>
+      </figure>
+      <p class="eyebrow"><span class="status-dot"></span> HAVE A STORY IN MIND?</p>
+      <h2 id="contact-splash-title">Every good story<br>starts with a <em>hello.</em></h2>
+      <p class="contact-splash-description">Tell me a little about what you're planning. I'd love to hear what matters to you.</p>
+      <form class="contact-form" id="contact-form">
+        <div class="contact-form-row">
+          <label for="contact-name">Your name</label>
+          <input id="contact-name" name="name" autocomplete="name" maxlength="100" placeholder="How should I address you?" required>
+        </div>
+        <div class="contact-form-row">
+          <label for="contact-email">Email address</label>
+          <input id="contact-email" name="email" type="email" autocomplete="email" maxlength="200" placeholder="Where can I write back?" required>
+        </div>
+        <div class="contact-form-row contact-message-row">
+          <label for="contact-message">A little about your project</label>
+          <textarea id="contact-message" name="message" rows="3" maxlength="3000" placeholder="The date, the place, or just the feeling you're after..." required></textarea>
+        </div>
+        <button class="button button-dark" type="submit">Write your note <span aria-hidden="true">↗</span></button>
+      </form>
+      <div class="contact-splash-footer">
+        <p>Your email app will open with your note ready to send.</p>
+        <a href="mailto:hello@example.com">OR EMAIL ME DIRECTLY ↗</a>
+      </div>
+    </div>
+    <button class="contact-splash-dismiss" type="button" aria-label="Close contact screen">×</button>
+  </dialog>
+
+  <dialog class="lightbox" id="lightbox" aria-label="Photo viewer">
+    <button class="lightbox-close" type="button" aria-label="Close photo viewer">×</button>
+    <button class="lightbox-prev" type="button" aria-label="Previous photo">←</button>
+    <img class="lightbox-image" alt="">
+    <button class="lightbox-next" type="button" aria-label="Next photo">→</button>
+    <div class="lightbox-caption"></div>
+  </dialog>
+</body>
+</html>

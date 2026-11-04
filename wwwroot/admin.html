@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5f0" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#171916" media="(prefers-color-scheme: dark)">
+  <title>Studio — Alex</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='80' font-family='serif' font-weight='bold' fill='%23bd5637'>A.</text></svg>">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/admin.js" defer></script>
+</head>
+<body class="admin-page">
+  <header class="site-header">
+    <a class="wordmark" href="/" aria-label="Alex home">A<span>.</span></a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a class="nav-link" href="/#work">Selected work</a>
+      <a class="nav-link" href="/events">Events</a>
+      <a class="nav-link" href="/#about">About</a>
+      <a class="nav-link" href="mailto:hello@example.com" data-open-contact>Get in touch <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+  <main class="admin-main">
+    <section class="login-panel" id="login-panel">
+      <p class="eyebrow">ALEX / STUDIO</p>
+      <h1>Your work,<br><em>your space.</em></h1>
+      <p class="login-description">Sign in to add a new story or keep your collection up to date.</p>
+      <form class="login-form" id="login-form">
+        <label>Email address<input name="email" type="email" autocomplete="username" required placeholder="you@example.com"></label>
+        <label>Password<input name="password" type="password" autocomplete="current-password" required placeholder="Your password"></label>
+        <button class="button button-dark" type="submit">Enter studio <span aria-hidden="true">↗</span></button>
+        <p class="form-message" id="login-message" role="status"></p>
+      </form>
+      <p class="login-footnote">Private access for the photographer.</p>
+    </section>
+
+    <section class="dashboard hidden" id="dashboard">
+      <div class="dashboard-heading">
+        <div>
+          <p class="eyebrow">YOUR COLLECTION / <span id="admin-gallery-count">0</span> STORIES</p>
+          <h1>Studio<span class="heading-period">.</span></h1>
+        </div>
+        <div class="dashboard-actions">
+          <button class="button button-quiet" id="open-settings" type="button">Settings ⚙</button>
+          <button class="button button-outline" id="open-gdrive-modal" type="button">Import from Google Drive ☁</button>
+          <button class="button button-quiet logout-button hidden" id="logout" type="button">Sign out</button>
+          <button class="button button-dark" id="new-gallery" type="button">New gallery <span aria-hidden="true">+</span></button>
+        </div>
+      </div>
+      <section class="studio-overview" aria-label="Collection overview">
+        <div class="studio-stat"><span>GALLERIES</span><strong id="admin-stat-galleries">0</strong><small>in your collection</small></div>
+        <div class="studio-stat"><span>PHOTOGRAPHS</span><strong id="admin-stat-photos">0</strong><small>across all galleries</small></div>
+        <div class="studio-stat"><span>PUBLIC EVENTS</span><strong id="admin-stat-public-events">0</strong><small>visible to everyone</small></div>
+        <div class="studio-stat"><span>PRIVATE EVENTS</span><strong id="admin-stat-private-events">0</strong><small>access key protected</small></div>
+      </section>
+      <div class="dashboard-content">
+        <section class="collection-panel" aria-label="Manage galleries">
+          <div class="collection-tools">
+            <label class="sr-only" for="gallery-search">Search galleries</label>
+            <input id="gallery-search" type="search" placeholder="Search title, category, place or date" autocomplete="off">
+            <div class="collection-filters">
+              <label><span class="sr-only">Filter galleries</span>
+                <select id="gallery-filter">
+                  <option value="all">All galleries</option>
+                  <option value="portfolio">Portfolio</option>
+                  <option value="public-event">Public events</option>
+                  <option value="private-event">Private events</option>
+                </select>
+              </label>
+              <label><span class="sr-only">Sort galleries</span>
+                <select id="gallery-sort">
+                  <option value="newest">Newest first</option>
+                  <option value="oldest">Oldest first</option>
+                  <option value="title">Title A–Z</option>
+                  <option value="photos">Most photos</option>
+                </select>
+              </label>
+              <button class="button button-quiet collection-reset hidden" id="clear-gallery-filters" type="button">Clear</button>
+            </div>
+          </div>
+          <p class="collection-result" id="collection-result" aria-live="polite"></p>
+          <div class="gallery-list" id="admin-gallery-list"></div>
+        </section>
+        <form class="editor hidden" id="gallery-form">
+          <div class="editor-heading">
+            <div><p class="eyebrow" id="editor-eyebrow">NEW STORY</p><h2 id="editor-title">A new gallery</h2></div>
+            <button class="icon-button" id="cancel-edit" type="button" aria-label="Close editor">×</button>
+          </div>
+          <div class="editor-ai-bar">
+            <button class="button button-outline" id="gemini-suggest-btn" type="button">✨ Auto-name &amp; describe with Gemini</button>
+            <span class="ai-status" id="gemini-status"></span>
+          </div>
+          <input name="id" type="hidden">
+          <label>Gallery title<input name="title" maxlength="100" required placeholder="The quiet coast"></label>
+          <div class="form-columns">
+            <label>Category<input name="category" maxlength="60" required placeholder="Travel, Portraits..."></label>
+            <label>Location<input name="location" maxlength="100" placeholder="Lisbon, Portugal"></label>
+          </div>
+          <label>Description / Story
+            <textarea name="description" rows="2" maxlength="1000" placeholder="An atmospheric story or note about this collection..."></textarea>
+            <span class="label-hint">A poetic or descriptive note for this gallery or event story.</span>
+          </label>
+          <label>Date<input name="date" type="date" required></label>
+          <div class="visibility-options">
+            <label class="visibility-toggle">
+              <input name="isEvent" type="checkbox">
+              <span><strong>Show on the Events page</strong><small>Include this gallery in the public events collection.</small></span>
+            </label>
+            <label class="visibility-toggle">
+              <input name="isPrivate" type="checkbox">
+              <span><strong>Private event gallery</strong><small>Require this gallery’s own access key to view it.</small></span>
+            </label>
+          </div>
+          <label class="private-gallery-key hidden" id="private-gallery-key-control">Guest access key
+            <input name="accessKey" type="password" minlength="8" maxlength="8" pattern="[A-Za-z0-9]{8}" autocomplete="new-password" placeholder="8 letters or numbers">
+            <span class="label-hint" id="private-gallery-key-hint">Choose a unique 8-character key and share it with this gallery’s guests.</span>
+          </label>
+          <section class="private-gallery-share hidden" id="private-gallery-share" aria-label="Private gallery share link">
+            <div>
+              <strong>Guest share link</strong>
+              <p class="label-hint" id="private-gallery-share-hint">Create a secure link guests can open without entering the key. Guest access lasts 8 hours.</p>
+            </div>
+            <div class="share-link-actions">
+              <button class="button button-outline" id="generate-share-link" type="button">Create &amp; copy link</button>
+              <button class="button button-quiet hidden" id="revoke-share-link" type="button">Revoke link</button>
+            </div>
+            <label class="hidden" id="share-link-control">Copy or share this link
+              <input id="share-link-value" type="url" readonly>
+            </label>
+            <p class="form-message" id="share-link-message" role="status" aria-live="polite"></p>
+          </section>
+          <label>Photographs <span class="label-hint">One photo URL per line. Uploads are stored on this server.</span>
+            <textarea name="images" rows="5" required placeholder="https://..."></textarea>
+          </label>
+          <div class="editor-upload-options">
+            <label class="upload-control">Add photographs from your device
+              <input id="image-upload" type="file" accept="image/jpeg,image/png,image/webp" multiple>
+              <span class="upload-note">JPEG, PNG or WebP · up to 20 MB each. Automatically analyzed by Gemini if title is empty.</span>
+            </label>
+            <button class="button button-outline editor-gdrive-button" id="editor-open-gdrive" type="button">Or import from Google Drive ☁</button>
+          </div>
+          <p class="form-message" id="editor-message" role="status"></p>
+          <div class="editor-actions">
+            <button class="button button-dark" type="submit">Save gallery <span aria-hidden="true">↗</span></button>
+            <button class="button button-quiet" id="delete-gallery" type="button">Delete gallery</button>
+          </div>
+        </form>
+      </div>
+      <p class="dashboard-note">Changes are saved on this server and appear on your public gallery right away.</p>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <a class="wordmark" href="/">A<span>.</span></a>
+    <span>PRIVATE STUDIO</span>
+    <a href="/" target="_blank" rel="noreferrer">PUBLIC WEBSITE <span aria-hidden="true">↗</span></a>
+    <span>© <span id="year"></span> ALEX</span>
+  </footer>
+  <dialog class="admin-modal" id="gdrive-modal" aria-labelledby="gdrive-modal-title">
+    <div class="admin-modal-inner">
+      <div class="admin-modal-header">
+        <div>
+          <p class="eyebrow">GOOGLE DRIVE / EVENTS</p>
+          <h2 id="gdrive-modal-title">Import event from Google Drive</h2>
+        </div>
+        <button class="icon-button" id="close-gdrive-modal" type="button" aria-label="Close dialog">×</button>
+      </div>
+      <p class="admin-modal-desc">Paste a link to a Google Drive folder or shared photo links. The images will be downloaded, converted for fast loading, and added directly to your collection.</p>
+      <form class="admin-modal-form" id="gdrive-form">
+        <label>Google Drive folder or file link
+          <input id="gdrive-url" type="url" required placeholder="https://drive.google.com/drive/folders/..." autocomplete="off">
+          <span class="label-hint">Ensure the Google Drive folder is shared with "Anyone with the link can view".</span>
+        </label>
+        <div class="modal-toggles">
+          <label class="visibility-toggle">
+            <input id="gdrive-is-event" type="checkbox" checked>
+            <span><strong>Publish as an Event story</strong><small>Display on the Events page.</small></span>
+          </label>
+          <label class="visibility-toggle">
+            <input id="gdrive-auto-gemini" type="checkbox" checked>
+            <span><strong>Auto-name &amp; describe with Gemini ✨</strong><small>Let Gemini AI generate the title, location, category, and story.</small></span>
+          </label>
+        </div>
+        <p class="form-message" id="gdrive-message" role="status" aria-live="polite"></p>
+        <div class="admin-modal-actions">
+          <button class="button button-dark" id="gdrive-submit-btn" type="submit">Import Event Photos ↗</button>
+          <button class="button button-quiet" id="cancel-gdrive-modal" type="button">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog class="admin-modal" id="settings-dialog" aria-labelledby="settings-dialog-title">
+    <div class="admin-modal-inner">
+      <div class="admin-modal-header">
+        <div>
+          <p class="eyebrow">STUDIO / CONFIGURATION</p>
+          <h2 id="settings-dialog-title">AI &amp; Cloud Settings</h2>
+        </div>
+        <button class="icon-button" id="close-settings" type="button" aria-label="Close dialog">×</button>
+      </div>
+      <p class="admin-modal-desc">Configure Google Gemini for automated photo analysis, creative title generation, and story descriptions, plus optional Google Drive API access.</p>
+      <form class="admin-modal-form" id="settings-form">
+        <label>Google Gemini API Key
+          <input id="settings-gemini-key" type="password" placeholder="AIzaSy... (or leave blank to keep current / use env var)" autocomplete="off">
+          <span class="label-hint" id="gemini-key-hint">Powers Gemini 3.8 Flash for evocative titles, categories, and narrative descriptions.</span>
+        </label>
+        <label>Google Drive API Key (Optional)
+          <input id="settings-gdrive-key" type="password" placeholder="AIzaSy... (optional for non-public Drive folders)" autocomplete="off">
+          <span class="label-hint" id="gdrive-key-hint">Shared view-only links work without a key. A Drive API key is needed for restricted folders.</span>
+        </label>
+        <p class="form-message" id="settings-message" role="status" aria-live="polite"></p>
+        <div class="admin-modal-actions">
+          <button class="button button-dark" type="submit">Save settings</button>
+          <button class="button button-quiet" id="cancel-settings" type="button">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+</body>
+</html>
